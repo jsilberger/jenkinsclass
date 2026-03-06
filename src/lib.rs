@@ -1,3 +1,30 @@
+//! Core library for the `fortune` CLI.
+//!
+//! This crate provides:
+//! - A lazily loaded collection of fortune strings ([`FORTUNES`]).
+//! - Pure formatting logic for display output ([`print_fortune`]).
+//! - Testable argument parsing helpers ([`parse_name_from_args`]).
+//!
+//! # Examples
+//!
+//! Build a formatted message:
+//!
+//! ```
+//! use fortune::print_fortune;
+//!
+//! let rendered = print_fortune("May your build stay green.", "Avery");
+//! assert!(rendered.contains("This fortune is for Avery."));
+//! ```
+//!
+//! Parse a name from CLI-like args:
+//!
+//! ```
+//! use fortune::parse_name_from_args;
+//!
+//! assert_eq!(parse_name_from_args(["--name", "Taylor"]), "Taylor");
+//! assert_eq!(parse_name_from_args(["--list"]), "you");
+//! ```
+
 use std::{env, sync::LazyLock};
 
 /// Collection of available fortunes loaded from `data/fortunes.txt`.
