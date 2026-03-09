@@ -1,5 +1,5 @@
 #!/bin/bash
-ls * 2>/dev/null || echo "No existing ${TOTAL_FILE} found, will create new one."
+ls * 
 
 # Array of machine names
 mapfile -t MACHINES < ./data/machines.txt
@@ -36,3 +36,4 @@ ls -l ./*${SRC_FILE}
 echo "All metrics collected into ${TOTAL_FILE}"
 echo "Contents of ${TOTAL_FILE}:"
 cat "${TOTAL_FILE}"
+find . -type f ! -name 'all_metrics.csv' -delete
