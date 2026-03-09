@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Array of machine names (edit this list)
-MACHINES=("robot-123e4567-e89b-12d3-a456-426614174000" "robot-550e8400-e29b-41d4-a716-446655440000" "robot-6ba7b810-9dad-11d1-80b4-00c04fd430c8")
+mapfile -t MACHINES < ../data/machines.txt
+
 
 # Local source file
 SRC_FILE="metrics.csv"
