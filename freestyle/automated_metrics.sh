@@ -36,3 +36,4 @@ ls -l ./*${SRC_FILE}
 echo "All metrics collected into ${TOTAL_FILE}"
 echo "Contents of ${TOTAL_FILE}:"
 cat "${TOTAL_FILE}"
+rm robot_*.csv  # Clean up individual files
