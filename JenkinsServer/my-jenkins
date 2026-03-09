@@ -1,13 +1,19 @@
 # Use the official Jenkins LTS image as base
-FROM jenkins/jenkins:lts-jdk25
+FROM jenkins/jenkins:latest
 
 # Switch to root to install extra packages (optional)
-USER root
 
-# Install any tools you want available in Jenkins (example: git, docker-cli)
-RUN apt-get update && \
-    apt-get install -y git curl && \
-    rm -rf /var/lib/apt/lists/*
+USER root
+COPY ./cert/MITRE_BA_ROOT.crt /usr/local/share/ca-certificates/corp-root-ca.crt
+
+RUN apt-get update && apt-get install -y ca-certificates openssl \
+ && update-ca-certificates \
+ && keytool -importcert -noprompt -trustcacerts \
+      -alias corp-root-ca \
+      -file /usr/local/share/ca-certificates/corp-root-ca.crt \
+      -keystore "$JAVA_HOME/lib/security/cacerts" \
+      -storepass changeit
+
 
 # Create a volume for Jenkins home (persistent config and jobs)
 VOLUME /var/jenkins_home
