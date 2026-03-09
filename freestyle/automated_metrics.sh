@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Array of machine names (edit this list)
+# Array of machine names
 mapfile -t MACHINES < ./data/machines.txt
 
 
@@ -14,7 +14,7 @@ echo "Job Name: $JOB_NAME"
 echo "Build ID: $BUILD_ID"
 echo "Build URL: $BUILD_URL"
 echo "Timestamp: $DATE_TIME"
-
+ls ${TOTAL_FILE} 2>/dev/null || echo "No existing ${TOTAL_FILE} found, will create new one."
 ls -l ./*${SRC_FILE}  # List existing metrics files for reference
 # Loop: SCP from each machine to local
 for machine in "${MACHINES[@]}"; do
