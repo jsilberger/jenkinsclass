@@ -4,7 +4,7 @@ use rand::{RngExt, SeedableRng, rngs::StdRng};
 
 #[derive(Debug, Parser)]
 #[command(name = "fortune", version, about = "Print a random developer fortune")]
-struct Cli {
+ struct Cli {
     /// Recipient name shown in the formatted output.
     #[arg(long, default_value = "you")]
     name: String,
