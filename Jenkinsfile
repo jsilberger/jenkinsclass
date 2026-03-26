@@ -42,19 +42,28 @@ pipeline {
 
         stage('Clippy') {
             steps {
-                sh 'cargo clippy --all-targets --all-features -- -D warnings -W clippy::pedantic'
+                sh '''
+                    . "$HOME/.cargo/env"
+                    cargo clippy --all-targets --all-features -- -D warnings -W clippy::pedantic
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh 'cargo test --all-features'
+                sh '''
+                    . "$HOME/.cargo/env"
+                    cargo test --all-features
+                '''
             }
         }
 
         stage('Release Build') {
             steps {
-                sh 'cargo build --release --all-targets'
+                sh '''
+                    . "$HOME/.cargo/env"
+                    cargo build --release --all-targets
+                '''
             }
         }
 
