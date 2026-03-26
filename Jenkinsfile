@@ -19,14 +19,15 @@ pipeline {
             steps {
                 sh '''
                     set -eu
-                    if ! command -v cargo >/dev/null 2>&1; then
+                   
                         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
-                    fi
-                    . "$HOME/.cargo/env"
+                   
+                    . "${CARGO_HOME}/env"
+                    "${CARGO_HOME}/bin/rustup" default stable
+                    "${CARGO_HOME}/bin/rustup" component add clippy rustfmt
+                    rustup component add clippy rustfmt
+                    . "${CARGO_HOME}/env"
                     
-                    /var/jenkins_home/.cargo/bin/rustup default stable
-                    /var/jenkins_home/.cargo/bin/rustup component add clippy rustfnt 
-                    . "$HOME/.cargo/env"
                     cargo --version
                     rustc --version
                 '''
