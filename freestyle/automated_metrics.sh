@@ -27,6 +27,7 @@ echo "Job Name: $JOB_NAME"
 echo "Build ID: $BUILD_ID"
 echo "Build URL: $BUILD_URL"
 echo "Timestamp: $DATE_TIME"
+touch ${TOTAL_FILE} 
 ls ${TOTAL_FILE} 2>/dev/null || echo "No existing ${TOTAL_FILE} found, will create new one."
 ls -l ./*${SRC_FILE}  # List existing metrics files for reference
 # Loop through each machine and append its daily metric into TOTAL_FILE.
@@ -47,4 +48,4 @@ ls -l ./*${SRC_FILE}
 echo "All metrics collected into ${TOTAL_FILE}"
 echo "Contents of ${TOTAL_FILE}:"
 cat "${TOTAL_FILE}"
-#rm robot-*.csv  # Clean up individual files
+rm robot-*.csv  # Clean up individual files
