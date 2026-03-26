@@ -33,7 +33,10 @@ pipeline {
 
         stage('Format Check') {
             steps {
-                sh 'cargo fmt --all -- --check'
+                sh '''
+                    . "$HOME/.cargo/env"
+                    cargo fmt --all -- --check
+                '''
             }
         }
 
